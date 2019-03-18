@@ -115,12 +115,14 @@
 #### 8）应用
 
 问题：
+剑指offer第41题：[http://t.cn/ExfFH9X](http://t.cn/ExfFH9X "剑指offer第41题")
 	
 	数据流中的中位数：
 		如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。
 		如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。
 
-	[https://www.nowcoder.com/practice/9be0172896bd43948f8a32fb954e1be1?tpId=13&tqId=11216&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking](https://www.nowcoder.com/practice/9be0172896bd43948f8a32fb954e1be1?tpId=13&tqId=11216&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking "剑指offer第41题")
+
+
 思路：
 	
 	建立大根堆放N/2个数
