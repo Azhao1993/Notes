@@ -71,6 +71,7 @@
 
 #### 2）改进
 经典快排的时间复杂度与数据状况有关。利用随机数消除数据状况对算法的影响。
+
 快排每次只能排好一个数，利用荷兰国旗问题对快排进行改进。（三路快排）。
 
 #### 3）代码
@@ -89,7 +90,6 @@
 			quickSort(arr, l, p[0] - 1);
 			quickSort(arr, p[1] + 1, r);
 		}
-
 	}
 	//经典快排下面的应该用partition的代码
 	private static int[] netherLand(int[] arr, int l, int r) {
@@ -107,3 +107,9 @@
 		swap(arr, more, r);// 注意把最后一个数arr[r]放在=key的区域
 		return new int[] { less + 1, more - 1 };
 	}
+
+#### 4）分析
+
+时间复杂度：最坏的情况下O（N^2）,最好的情况下O(N logN);平均时间复杂度O（N logN）;
+
+空间复杂度：O（N logN）;
