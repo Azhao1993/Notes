@@ -26,7 +26,6 @@ public class TestThreads {
 
             //等2000年再开一炮
             Thread.sleep(2000L);
-
         }
 
     }
@@ -37,26 +36,19 @@ public class TestThreads {
         }
         @Override
         public void run() {
-            for (int i = 0; i < 1; i++) {
-                try {
-                    Thread.sleep(3000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                synchronized (key) {
-                    while (count == FULL) {
-                        try {
-                            key.wait();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+            synchronized (key) {
+                while (count == FULL) {
+                    try {
+                        key.wait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    count++;
-                    //System.out.print(currentThread().getName());
-                    System.out.println("正在装弹请等待");
-                    System.out.println("装弹完成");
-                    key.notifyAll();
                 }
+                count++;
+                //System.out.print(currentThread().getName());
+                System.out.println("正在装弹请等待");
+                System.out.println("装弹完成");
+                key.notifyAll();
             }
         }
     }
@@ -67,28 +59,21 @@ public class TestThreads {
         }
         @Override
         public void run() {
-            for (int i = 0; i < 1; i++) {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                synchronized (key) {
-                    while (count == 0) {
-                        //System.out.print(currentThread().getName());
-                        System.out.println("没有炮弹，快上弹");
-                        try {
-                            key.wait();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    count--;
+            synchronized (key) {
+                while (count == 0) {
                     //System.out.print(currentThread().getName());
-                    System.out.println("开炮");
-                    System.out.println("==========");
-                    key.notifyAll();
+                    System.out.println("没有炮弹，快上弹");
+                    try {
+                        key.wait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+                count--;
+                //System.out.print(currentThread().getName());
+                System.out.println("开炮");
+                System.out.println("==========");
+                key.notifyAll();
             }
         }
     }
