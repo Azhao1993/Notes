@@ -1,0 +1,95 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * 生产者和消费者，wait()和notify()的实现
+ * https://juejin.im/entry/596343686fb9a06bbd6f888c
+ */
+public class TestThreads {
+    private static Integer count = 0;
+    private static final Integer FULL = 1;
+
+    public static void main(String[] args) throws Exception {
+        final Object key = new Object();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        while (true) {
+            //记录一下
+            System.out.println("历史：" + simpleDateFormat.format(new Date()) + "战争打响！");
+            //开炮人就位检查营长的意大利炮
+            new TestThreads.ThreadShut(key).start();
+            //检查了500年
+            Thread.sleep(500L);
+            //装弹人就位，等待指令装弹
+            new TestThreads.ThreadBullet(key).start();
+
+            //等2000年再开一炮
+            Thread.sleep(2000L);
+
+        }
+
+    }
+    public static class ThreadBullet extends Thread {
+        private final Object key;
+        public ThreadBullet(Object key) {
+            this.key = key;
+        }
+        @Override
+        public void run() {
+            for (int i = 0; i < 1; i++) {
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                synchronized (key) {
+                    while (count == FULL) {
+                        try {
+                            key.wait();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    count++;
+                    //System.out.print(currentThread().getName());
+                    System.out.println("正在装弹请等待");
+                    System.out.println("装弹完成");
+                    key.notifyAll();
+                }
+            }
+        }
+    }
+    public static class ThreadShut extends Thread {
+        private final Object key;
+        public ThreadShut(Object key) {
+            this.key = key;
+        }
+        @Override
+        public void run() {
+            for (int i = 0; i < 1; i++) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                synchronized (key) {
+                    while (count == 0) {
+                        //System.out.print(currentThread().getName());
+                        System.out.println("没有炮弹，快上弹");
+                        try {
+                            key.wait();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    count--;
+                    //System.out.print(currentThread().getName());
+                    System.out.println("开炮");
+                    System.out.println("==========");
+                    key.notifyAll();
+                }
+            }
+        }
+    }
+}
