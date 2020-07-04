@@ -91,7 +91,7 @@ arm64所需的.so在
 
 `Plugins`目录下包含各种平台的Plugin,但不包括Android平台
 
-将上步骤生成的`libRenderingPlugin.so`复制到`Plugins\Android\`
+将上步骤生成的`libRenderingPlugin.so`复制到`Plugins\Android\`(![Unity默认目录](https://docs.unity3d.com/Manual/PluginInspector.html))
 
     注：.so文件可以放在任意目录下
 
