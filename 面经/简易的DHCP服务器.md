@@ -144,7 +144,7 @@ REQUEST=AABBCCDDEEF1 优先分配之前最近一次分配的IP地址，输出192
 	    }
 	};
 	
-	int main2()
+	int main()
 	{
 	    int line;
 	    cin >> line;
