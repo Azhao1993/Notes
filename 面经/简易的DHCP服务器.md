@@ -21,9 +21,9 @@ DHCP服务器的功能是为每一个MAC地址分配唯一的IP地址，请详�
 
 首行为整数n, 表示其后输入的命令行数，范围[1,2000]。
 
-之后每行为一条命令，格式为: 命令=MAC地址
+之后每行为一条命令，格式为: `命令=MAC地址`
 
-命令只有两种: REQUEST 和 RELEASE ，例如:
+命令只有两种:`REQUEST` 和`RELEASE`，例如:
 
 REQUEST=AABBCCDDEEF1 表示给MAC地址为AABBCCDDEEF1分配一个IP地址
 
@@ -33,9 +33,9 @@ RELEASE=AABBCCDDEEF1 表示释放MAC地址之前分配的IP地址
 
 **输出**
 
-1.REQUEST命令，输出分配和结果(lP地址或NA )。
+1.REQUEST命令，输出分配和结果(lP地址或`NA` )。
 
-2.RELEASE命令，不输出任何内容，
+2.RELEASE命令，不输出任何内容。
 
 
 **样例**
